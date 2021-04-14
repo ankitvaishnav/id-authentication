@@ -12,7 +12,7 @@ ARG active_profile
 # can be passed during Docker build as build time environment for config server URL 
 ARG spring_config_url
 
-ARG bio_sdk_folder=tech5
+ARG bio_sdk_folder=mock/0.9
 
 ARG softhsm_client_zip=client.zip
 
