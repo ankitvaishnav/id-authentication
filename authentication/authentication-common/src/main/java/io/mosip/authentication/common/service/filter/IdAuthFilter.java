@@ -46,6 +46,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import io.mosip.authentication.core.util.BytesUtil;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -84,7 +85,8 @@ import io.mosip.kernel.core.util.StringUtils;
  */
 @Component
 public class IdAuthFilter extends BaseAuthFilter {
-	
+
+	private static final String TRANSACTION_ID = "transactionId";
 	protected PartnerService partnerService;
 	
 	@Override
@@ -213,9 +215,11 @@ public class IdAuthFilter extends BaseAuthFilter {
 			
 			Object sessionKey = Objects.nonNull(map.get(SESSION_KEY)) ? map.get(SESSION_KEY) : null;
 			String timestamp = String.valueOf(data.get(TIMESTAMP));
-			byte[] saltLastBytes = getLastBytes(timestamp, env.getProperty(IdAuthConfigKeyConstants.IDA_SALT_LASTBYTES_NUM, Integer.class, DEFAULT_SALT_LAST_BYTES_NUM));
+			String transactionId = String.valueOf(data.get(TRANSACTION_ID));
+			byte[] xorBytes = BytesUtil.getXOR(timestamp, transactionId);
+			byte[] saltLastBytes = BytesUtil.getLastBytes(xorBytes, env.getProperty(IdAuthConfigKeyConstants.IDA_SALT_LASTBYTES_NUM, Integer.class, DEFAULT_SALT_LAST_BYTES_NUM));
 			String salt = CryptoUtil.encodeBase64(saltLastBytes);
-			byte[] aadLastBytes = getLastBytes(timestamp, env.getProperty(IdAuthConfigKeyConstants.IDA_AAD_LASTBYTES_NUM, Integer.class, DEFAULT_AAD_LAST_BYTES_NUM));
+			byte[] aadLastBytes = BytesUtil.getLastBytes(xorBytes, env.getProperty(IdAuthConfigKeyConstants.IDA_AAD_LASTBYTES_NUM, Integer.class, DEFAULT_AAD_LAST_BYTES_NUM));
 			String aad = CryptoUtil.encodeBase64(aadLastBytes);
 			String combinedData = combineDataForDecryption(String.valueOf(bioValue), String.valueOf(sessionKey));
 			String decryptedData = keyManager.kernelDecrypt(combinedData, getBioRefId(), aad, salt);
@@ -271,18 +275,6 @@ public class IdAuthFilter extends BaseAuthFilter {
 				env.getProperty(IdAuthConfigKeyConstants.KEY_SPLITTER));
 		return CryptoUtil.encodeBase64(
 				combineByteArray);
-	}
-
-	/**
-	 * Gets the last bytes.
-	 *
-	 * @param timestamp the timestamp
-	 * @param lastBytesNum the last bytes num
-	 * @return the last bytes
-	 */
-	private byte[] getLastBytes(String timestamp, int lastBytesNum) {
-		assert(timestamp.length() >= lastBytesNum);
-		return timestamp.substring(timestamp.length() - lastBytesNum).getBytes();
 	}
 
 	/**
