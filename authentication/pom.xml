@@ -49,8 +49,8 @@
                <repository>
                        <id>github</id>
                        <url>https://maven.pkg.github.com/mosip/id-authentication</url>
-               </repository> 
-        </distributionManagement> 
+               </repository>
+        </distributionManagement>
 	<repositories>
 		<repository>
 		  <id>ossrh</id>
@@ -61,7 +61,7 @@
 			<enabled>true</enabled>
 		  </snapshots>
 		</repository>
-	</repositories> 
+	</repositories>
 	<modules>
 		<module>authentication-core</module>
 		<module>authentication-common</module>
@@ -75,7 +75,7 @@
 	<properties>
 		<!--FIXME Temporarily disabling to avoid build error-->
 		<sonar.skip>true</sonar.skip>
-		
+
 		<authentication.parent.version>${project.version}</authentication.parent.version>
 		<authentication-core.version>${authentication.parent.version}</authentication-core.version>
 		<authentication-common.version>${authentication.parent.version}</authentication-common.version>
@@ -138,7 +138,7 @@
 
 		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
 		<maven.war.plugin.version>3.1.0</maven.war.plugin.version>
-		
+
 		<io.micrometer.prometheus.version>1.4.2</io.micrometer.prometheus.version>
 
 	</properties>
@@ -237,7 +237,7 @@
 					</execution>
 				  </executions>
 			</plugin>
-		
+
 	                <plugin>
 				  <groupId>org.apache.maven.plugins</groupId>
 				  <artifactId>maven-gpg-plugin</artifactId>
