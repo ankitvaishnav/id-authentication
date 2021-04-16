@@ -17,9 +17,9 @@ public final class IdaLogger {
 	static {
 		mosipRollingFileAppender = new RollingFileAppender();
 		mosipRollingFileAppender.setAppend(true);
-		mosipRollingFileAppender.setAppenderName("fileappender");
-		mosipRollingFileAppender.setFileName("./id-auth.log");
-		mosipRollingFileAppender.setFileNamePattern("./id-auth-%d{yyyy-MM-dd}-%i.log");
+		mosipRollingFileAppender.setAppenderName("org.apache.log4j.RollingFileAppender");
+		mosipRollingFileAppender.setFileName("./logs/id-auth.log");
+		mosipRollingFileAppender.setFileNamePattern("./logs/id-auth-%d{yyyy-MM-dd}-%i.log");
 		mosipRollingFileAppender.setImmediateFlush(true);
 		mosipRollingFileAppender.setMaxFileSize("1mb");
 		mosipRollingFileAppender.setMaxHistory(3);
