@@ -404,6 +404,9 @@ public class IdAuthFilter extends BaseAuthFilter {
 	 * @throws UnsupportedEncodingException 
 	 */
 	private String validateHash(String data, String inputHashDigest, String previousHash) throws IdAuthenticationAppException, UnsupportedEncodingException {
+		System.out.println("--------------- validateHash --------------------");
+		System.out.println("--------------- data --------------------");
+		System.out.println(data);
 		System.out.println("--------------- inputHashDigest --------------------");
 		System.out.println(inputHashDigest);
 		System.out.println("--------------- previousHash --------------------");
