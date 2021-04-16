@@ -357,7 +357,7 @@ public class IdAuthFilter extends BaseAuthFilter {
 				String dataFieldValue = dataOpt.get();
 				String data = extractBioData(dataFieldValue);
 				
-				previousHash = validateHash(data, hashOpt.get(), previousHash);
+//				previousHash = validateHash(data, hashOpt.get(), previousHash);
 			}
 		} catch (UnsupportedEncodingException e) {
 			throw new IdAuthenticationAppException(IdAuthenticationErrorConstants.UNABLE_TO_PROCESS, e);
