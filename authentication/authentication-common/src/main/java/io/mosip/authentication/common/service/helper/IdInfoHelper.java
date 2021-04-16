@@ -389,6 +389,7 @@ public class IdInfoHelper {
 						|| value.getValue().isEmpty() || value.getValue().trim().length() == 0)) {
 			Category category = matchType.getCategory();
 			if (category == Category.BIO) {
+				System.out.println("category == Category.BIO");
 				throw new IdAuthenticationBusinessException(
 						IdAuthenticationErrorConstants.BIOMETRIC_MISSING.getErrorCode(),
 						String.format(IdAuthenticationErrorConstants.BIOMETRIC_MISSING.getErrorMessage(),
