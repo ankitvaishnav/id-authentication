@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -158,6 +160,12 @@ public class BioAuthServiceImpl implements BioAuthService {
 					request.setPurpose(DEVICE_PURPOSE_AUTH);
 					RequestWrapper<ValidateDeviceDTO> requestWrapper = new RequestWrapper<>();
 					requestWrapper.setRequest(request);
+					ObjectMapper mappers = new ObjectMapper();
+					try {
+						System.out.println(mappers.writeValueAsString(request));
+					} catch (JsonProcessingException e) {
+						e.printStackTrace();
+					}
 					restHelper.requestSync(restBuilder.buildRequest(RestServicesConstants.DEVICE_VERIFICATION_SERVICE,
 							requestWrapper, ResponseWrapper.class));
 				} catch (RestServiceException e) {
