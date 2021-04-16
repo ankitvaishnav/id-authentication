@@ -404,12 +404,20 @@ public class IdAuthFilter extends BaseAuthFilter {
 	 * @throws UnsupportedEncodingException 
 	 */
 	private String validateHash(String data, String inputHashDigest, String previousHash) throws IdAuthenticationAppException, UnsupportedEncodingException {
-	
-		
+		System.out.println("--------------- inputHashDigest --------------------");
+		System.out.println(inputHashDigest);
+		System.out.println("--------------- previousHash --------------------");
+		System.out.println(previousHash);
+
 		String currentHash =digest(getHash(CryptoUtil.decodeBase64(data)));
 		String concatenatedHash = previousHash + currentHash;
 		byte[] finalHash = getHash(concatenatedHash);
 		String finalHashDigest = digest(finalHash);
+
+		System.out.println("--------------- currentHash --------------------");
+		System.out.println(currentHash);
+		System.out.println("--------------- finalHashDigest --------------------");
+		System.out.println(finalHashDigest);
 		
 		if(!inputHashDigest.equals(finalHashDigest)) {
 			throwError(IdAuthenticationErrorConstants.INVALID_HASH);
