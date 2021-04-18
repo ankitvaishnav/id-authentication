@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -219,13 +218,6 @@ public class IdInfoFetcherImpl implements IdInfoFetcher {
 		Map<String, String> bdbBasedOnType;
 		try {
 			ObjectMapper map = new ObjectMapper();
-			System.out.println("---------- CbeffDocType -----------");
-			System.out.println(map.writeValueAsString(type));
-			System.out.println("---------- matchType -----------");
-			System.out.println(map.writeValueAsString(matchType));
-			System.out.println("---------- identityValue -----------");
-			System.out.println(map.writeValueAsString(identityValue.get()));
-
 			bdbBasedOnType = cbeffUtil.getBDBBasedOnType(CryptoUtil.decodeBase64(identityValue.get()), type.getName(),
 					null);
 		} catch (Exception e) {

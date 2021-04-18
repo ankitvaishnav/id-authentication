@@ -57,18 +57,8 @@
 			<version>${id-repository-core.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>
-						spring-boot-starter-security
-					</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>org.springframework.security</groupId>
-					<artifactId>spring-security-test</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>io.mosip.kernel</groupId>
-					<artifactId>kernel-auth-adapter</artifactId>
+					<artifactId>spring-security-config</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

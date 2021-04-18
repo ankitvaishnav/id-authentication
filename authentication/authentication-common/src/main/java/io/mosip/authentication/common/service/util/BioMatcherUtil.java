@@ -13,8 +13,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -98,17 +96,6 @@ public class BioMatcherUtil {
 					logger.debug(IdAuthCommonConstants.SESSION_ID, "IDA", "matchFunction", "bioProvider - " + bioProvider.getClass().getCanonicalName());
 					List<BIR> sample = reqBirByType.get(modality);
 					List<BIR> record = entityBirByType.get(modality);
-					ObjectMapper map = new ObjectMapper();
-
-					try {
-						System.out.println("---------- Sample -----------");
-						System.out.println(map.writeValueAsString(sample));
-						System.out.println("---------- Record -----------");
-						System.out.println(map.writeValueAsString(record));
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
-					}
-
 					if(sample != null) {
 						logger.debug(IdAuthCommonConstants.SESSION_ID, "IDA", "matchFunction", "sample birs list is not null");
 						if(record != null) {
